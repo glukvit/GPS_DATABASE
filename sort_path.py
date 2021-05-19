@@ -18,8 +18,3 @@ def sort_paths(path,names): # На вход  основной путь к дир
             filelist.append(item) 
     print(filelist)
     return(filelist)
-
-# def read_station_name(cfg_file): #Чтение конфига и создание списка из имен станций
-#     with open(cfg_file, 'r') as file:
-#         names =  file.read()
-#     return(names)

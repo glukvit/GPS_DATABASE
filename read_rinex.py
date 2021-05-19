@@ -1,4 +1,5 @@
 import gzip
+import datetime
 #from os import linesep
 from os import path
 ## Модуль читает заголовок rinex файла. На вход архивированный ринекс
@@ -29,8 +30,8 @@ def header_to_dict(every,line,header): # Обработчик строки. Ищ
         
     elif 'CRINEX PROG' in line:
         header['CRINEX PROG'] = line[0:21].rstrip()
-#    elif 'DATE' in line:
-#        header['DATE'] = line[40:60].rstrip()
+    elif 'DATE' in line:
+       header['DATE'] = line[40:60].rstrip()
     elif 'MARKER NAME' in line:
         header['MARKER NAME'] = line[0:10].rstrip()
     elif 'MARKER NUMBER' in line:
@@ -57,7 +58,10 @@ def header_to_dict(every,line,header): # Обработчик строки. Ищ
     elif 'INTERVAL' in line:
         header['INTERVAL'] = line[0:10].rstrip().lstrip()
     elif 'TIME OF FIRST OBS' in line:
-        header['TIME OF FIRST OBS'] =line[0:60].rstrip().lstrip()
+      #  header['TIME OF FIRST OBS'] =line[0:45].rstrip().lstrip().strip('     ')
+        header['TIME OF FIRST OBS'] = ''.join(line[0:45].split()) #Удаляем пробелы
+        # print(line[0:45])
+        # print(header['TIME OF FIRST OBS'])
 
 
     return(header)
